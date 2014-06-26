@@ -32,15 +32,24 @@ Download the source code
 git clone git@github.com:gustavopinto/bugzilla-py.git
 ```
 
-In the root dir, open a python shell and download a bug:
+In the root dir, open a python shell and try to download a bug:
 
 ```python
 >>> import crawler
 >>> url = "https://bugzilla.mozilla.org/show_bug.cgi?id=738529"
->>> report = crawler.download(url)
->>> print report
-RESOLVED FIXED,2012-03-22 19:24,2012-03-24 23:53,General,unspecified,All All,-- normal,,1,7,https://bugzilla.mozilla.org/show_bug.cgi?id=738529,,"&lt;away until June 29&gt; Kan-Ru Chen [:kanru]",1,0,1,60,0
->>>
+>>> bug = crawler.download(url)
+>>> bug.status
+'RESOLVED FIXED'
+>>> bug.version
+'unspecified'
+>>> bug.reported
+'2013-05-15 01:22'
+>>> bug.reporter
+'"leo.bugzilla.gecko"'
+>>> dir(bug)
+['__doc__', '__init__', '__module__', '__str__', 'attachment', 'blocks', 'cc_list',
+'comments', 'component', 'depends', 'flags', 'importance', 'modified', 'platform',
+'reopened', 'reported_date', 'reporter', 'status', 'url', 'version']
 ```
 
 Requirements

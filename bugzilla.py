@@ -13,7 +13,7 @@ def fix_url(url):
   """Prefix a schema-less URL with http://."""
   if '://' not in url:
     url = 'https://bugzilla.mozilla.org/show_bug.cgi?id=' + url
-  return url
+  return url.replace("\n", "")
 
 def read(file):
   """ Read from a file. Returns a list of strings """

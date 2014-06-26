@@ -19,7 +19,7 @@ class Bug:
 
   def __init__(self, status, reported_date, modified, component, version, platform, importance, flags, cc_list, comments, url, reporter, depends, blocks, attachment, reopened):
     self.status = " ".join(status.split())
-    self.reported_date = " ".join(reported_date.split())
+    self.reported = " ".join(reported_date.split())
     self.modified = " ".join(modified.split())
     self.component = " ".join(component.split())
     self.version = " ".join(version.split())
@@ -28,7 +28,7 @@ class Bug:
     self.flags = " ".join(flags.split())
     self.cc_list = " ".join(cc_list.split())
     self.comments = comments
-    self.url = url.replace("\n", "")
+    self.url = url
     self.reporter = "\"" + reporter + "\""
     self.depends = " ".join(depends.split())
     self.blocks = blocks
@@ -36,7 +36,7 @@ class Bug:
     self.reopened = reopened
 
   def __str__(self):
-    return self.status + "," + self.reported_date  + "," + self.modified + "," + self.component + "," + self.version + "," + self.platform + "," + self.importance + "," + self.flags + "," + self.cc_list + "," + str(self.comments) +"," + self.url + "," + "," + self.reporter + "," + to_bin(self.depends) + "," + to_bin(self.blocks) + "," + self.attachment.attempts + "," + self.attachment.locs() + "," + self.reopened
+    return self.status + "," + self.reported  + "," + self.modified + "," + self.component + "," + self.version + "," + self.platform + "," + self.importance + "," + self.flags + "," + self.cc_list + "," + str(self.comments) +"," + self.url + "," + "," + self.reporter + "," + to_bin(self.depends) + "," + to_bin(self.blocks) + "," + self.attachment.attempts + "," + self.attachment.locs() + "," + self.reopened
 
 class Attachment:
   """ The source code attachment provided to fix a bug """
