@@ -7,6 +7,11 @@ from bs4 import BeautifulSoup
 
 import http
 
+class BugNotFound(Exception):
+  def __init__(self, message):
+    Exception.__init__(self, message)
+
+
 class Bug:
   """ The main bug class.
 
@@ -54,8 +59,11 @@ class Comment:
     return " ".join(self.comment.split()).split("#c")[1].replace("\"","")
 
 
-def download(bug_id):
-  data = http.get(bug_id)
+def download(bug):
+  data = http.get(bug)
+
+  if "not a valid bug " in data:
+    raise BugNotFound("The bug %s does not exists!" % get_id(bug))
 
   status = get_element(data, "id=\"static_bug_status\">", "<")
   reported = get_element(data, "Reported:", "P")
@@ -103,10 +111,10 @@ def get_attachments(data):
 
   return Attachment(len(attempts), loc_per_attempt)
 
-def get_reopened(bug_id):
+def get_reopened(bug):
   """ Counts how many times one bug was reopened """
 
-  url = "https://bugzilla.mozilla.org/show_activity.cgi?id=" + get_id(bug_id)
+  url = "https://bugzilla.mozilla.org/show_activity.cgi?id=" + get_id(bug)
   data = http.get(url)
 
   soup = BeautifulSoup(data)

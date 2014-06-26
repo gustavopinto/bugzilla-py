@@ -45,8 +45,12 @@ def main():
         report(output)
     except KeyboardInterrupt:
       print "\nInterupted!"
+    except crawler.BugNotFound, e:
+      print "\nAn error occurred while crawling bug: " + bug
+      print e.message
     except:
       print "\nAn error occurred while crawling bug: " + bug
+      raise
 
 
 if __name__ == "__main__":

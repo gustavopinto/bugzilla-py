@@ -8,11 +8,15 @@ Usage
 
 If you want to crawl a particular bug, use
 
-```python bugzilla.py <bug-id>```
+```
+python bugzilla.py <bug-id>
+```
 
 Or, if you have a list of bugs that you want to crawl, use
 
-```python bugzilla.py -l <file>```
+```
+python bugzilla.py -l <file>
+```
 
 The results are exported as a csv file named ``output.csv``.
 
