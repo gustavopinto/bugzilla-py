@@ -28,7 +28,7 @@ class Bug:
     self.flags = " ".join(flags.split())
     self.cc_list = " ".join(cc_list.split())
     self.comments = comments
-    self.url = url
+    self.url = url.replace("\n", "")
     self.reporter = "\"" + reporter + "\""
     self.depends = " ".join(depends.split())
     self.blocks = blocks

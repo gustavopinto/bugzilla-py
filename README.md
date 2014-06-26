@@ -34,7 +34,7 @@ git clone git@github.com:gustavopinto/bugzilla-py.git
 
 In the root dir, open a python shell and download a bug:
 
-```
+```python
 >>> import crawler
 >>> url = "https://bugzilla.mozilla.org/show_bug.cgi?id=738529"
 >>> report = crawler.download(url)
@@ -49,3 +49,9 @@ Requirements
 * python 2.7 or above
 * BeautifulSoup
 * urllib2
+
+
+License
+-------
+
+Bugzilla-py is released under GPL 2.
