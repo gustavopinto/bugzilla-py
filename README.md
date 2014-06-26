@@ -6,19 +6,19 @@ This is an experimental library used to crawl meta-data information of bugs at [
 Usage
 -----
 
-If you want to crawl a particular bug, use
+If you want to crawl a sigle bug report, use
 
 ```
-python bugzilla.py <bug-id>
+python bugzilla.py -b <bug-id>
 ```
 
-Or, if you have a list of bugs that you want to crawl, use
+Or, if you have a list of bugs reports, you might want to use
 
 ```
 python bugzilla.py -l <file>
 ```
 
-The results are exported as a csv file named ``output.csv``.
+The results are saved in a csv file named ``output.csv`` in the root dir.
 
 Use --help to see all options.
 
