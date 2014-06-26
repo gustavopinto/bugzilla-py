@@ -6,7 +6,7 @@ import urllib2
 
 
 def get(url):
-  """ download page source """
+  """Start an HTTP request.  Return an html."""
   usock = urllib2.urlopen(url)
   data = usock.read()
   usock.close()
