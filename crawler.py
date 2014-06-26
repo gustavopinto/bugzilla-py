@@ -29,7 +29,7 @@ class Bug:
     self.cc_list = " ".join(cc_list.split())
     self.comments = comments
     self.url = url
-    self.reporter = reporter
+    self.reporter = "\"" + reporter + "\""
     self.depends = " ".join(depends.split())
     self.blocks = blocks
     self.attachment = attachment
@@ -80,9 +80,9 @@ def download(bug):
   reporter = get_element(data, "by <span class=\"vcard\">", "</span")
 
   attachment = get_attachments(data)
-  reopened = get_reopened(bug_id)
+  reopened = get_reopened(bug)
 
-  return Bug(remove_html(status), remove_html(reported), remove_html(modified), remove_html(component), remove_html(version), remove_html(platform), remove_html(importance), remove_html(flags), remove_html(cc_list), comments, bug_id, remove_html(reporter), depends, remove_html(blocks), attachment, reopened)
+  return Bug(remove_html(status), remove_html(reported), remove_html(modified), remove_html(component), remove_html(version), remove_html(platform), remove_html(importance), remove_html(flags), remove_html(cc_list), comments, bug, remove_html(reporter), depends, remove_html(blocks), attachment, reopened)
 
 def get_id(bug_url):
   return bug_url.split("=")[1]

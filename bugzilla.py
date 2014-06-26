@@ -1,6 +1,7 @@
 import crawler
 import argparse
 from reporting import report
+import time
 
 ARGS = argparse.ArgumentParser(description="Bugzilla web crawler")
 ARGS.add_argument(
@@ -36,13 +37,19 @@ def main():
     return
 
   if args.bugid:
+    start_time = time.time()
+
     bugs = {fix_url(bug) for bug in args.bugid}
     output = []
     try:
       for bug in bugs:
         result = crawler.download(bug)
         output.append(result)
-        report(output)
+      report(output)
+      total_time = round(time.time() - start_time, 2)
+
+      print "It took %s seconds to download %s bug reports!" % (total_time, len(bugs))
+
     except KeyboardInterrupt:
       print "\nInterupted!"
     except crawler.BugNotFound, e:
