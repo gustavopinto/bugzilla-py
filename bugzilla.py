@@ -40,25 +40,23 @@ def main():
     print "Use --help for command line help"
     return
 
-  bugs = None
-
   if args.b:
     bugs = {fix_url(bug) for bug in args.b}
   else:
     bugs = {fix_url(bug) for bug in read(args.f[0])}
 
-
-  start_time = time.time()
-  output = []
   try:
+    output = []
+    start_time = time.time()
+
     for bug in bugs:
       result = crawler.download(bug)
       output.append(result)
-    report(output)
-    total_time = round(time.time() - start_time, 2)
 
+    total_time = round(time.time() - start_time, 2)
     print "It took %s seconds to download %s bug reports!" % (total_time, len(bugs))
 
+    report(output)
   except KeyboardInterrupt:
     print "\nInterupted!"
   except crawler.BugNotFound, e:

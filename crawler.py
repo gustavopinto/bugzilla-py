@@ -62,7 +62,7 @@ class Comment:
 def download(bug):
   data = http.get(bug)
 
-  if "not a valid bug " in data:
+  if "not a valid bug" in data:
     raise BugNotFound("The bug %s does not exists!" % get_id(bug))
 
   status = get_element(data, "id=\"static_bug_status\">", "<")
