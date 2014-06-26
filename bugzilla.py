@@ -31,12 +31,15 @@ class Bug:
 
 class Attachment:
 
-  def __init__(self, attempts, locs_per_attempt):
+  def __init__(self, attempts, loc_per_attempt):
     self.attempts = str(attempts)
-    self.locs_per_attempt = locs_per_attempt
+    self.loc_per_attempt = loc_per_attempt
 
   def size(self):
     return self.locs_per_attempt
+
+  def __str__(self):
+    return self.attempts +": " + " ".join(self.loc_per_attempt)
 
 class Comment:
   def __init__(self, comment):
@@ -77,12 +80,18 @@ def get_element(data, start, stop):
   return partial[:end]
 
 def get_attachments(data):
-  attach_table = get_element(data, "id=\"attachment_table\"", "</table>")
-  attempts = attach_table.count("class=\"bz_contenttype_text_plain bz_patch\"")
+  soup = BeautifulSoup(data)
+  table = soup.find("table", id="attachment_table")
+  attempts = table.findChildren("tr", {"class":"bz_contenttype_text_plain bz_patch"})
 
   loc_per_attempt = []
 
-  return Attachment(attempts, loc_per_attempt)
+  for attempt in attempts:
+    patch_id = attempt.find('a')['href']
+    loc = http.get("https://bugzilla.mozilla.org/" + patch_id).count('\n')
+    loc_per_attempt.append(str(loc))
+
+  return Attachment(len(attempts), loc_per_attempt)
 
 def get_reopened(bug_id):
   url = "https://bugzilla.mozilla.org/show_activity.cgi?id=" + bug_id
@@ -132,7 +141,7 @@ def main():
 def sample():
   #907155 738529
   print "running sample"
-  print download_bug("966841")
+  print download_bug("995886")
 
 if __name__ == '__main__':
   #main()
