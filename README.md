@@ -18,7 +18,7 @@ Or, if you have a list of bugs reports, you might want to use
 python bugzilla.py -l <file>
 ```
 
-The results are saved in a csv file named ``output.csv`` in the root dir.
+Where file is a .txt file with one bug report id per line (such as [this one](energy-bugs-id.txt)). The results are saved in a csv file named ``output.csv`` in the root dir.
 
 Use --help to see all options.
 
