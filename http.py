@@ -10,9 +10,9 @@ def get(url):
 
   try:
     usock = urllib2.urlopen(url)
-    return usock.read()
-  except URLError, e:
+    data = usock.read()
+    usock.close()
+    return data
+  except urllib2.URLError, e:
     print e.code
     print e.read()
-  finally:
-    usock.close()
