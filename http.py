@@ -7,7 +7,12 @@ import urllib2
 
 def get(url):
   """Start an HTTP request.  Return an html."""
-  usock = urllib2.urlopen(url)
-  data = usock.read()
-  usock.close()
-  return data
+
+  try:
+    usock = urllib2.urlopen(url)
+    return usock.read()
+  except URLError, e:
+    print e.code
+    print e.read()
+  finally:
+    usock.close()

@@ -43,7 +43,7 @@ def main():
   if args.b:
     bugs = {fix_url(bug) for bug in args.b}
   else:
-    bugs = {fix_url(bug) for bug in read(args.f[0])}
+    bugs = [fix_url(bug) for bug in read(args.f[0])]
 
   try:
     output = []
@@ -58,12 +58,12 @@ def main():
 
     report(output)
   except KeyboardInterrupt:
-    print "\nInterupted!"
+    print "Interupted!"
   except crawler.BugNotFound, e:
-    print "\nAn error occurred while crawling bug: " + bug
+    print "An error occurred while crawling bug: " + bug
     print e.message
   except:
-    print "\nAn error occurred while crawling bug: " + bug
+    print "An error occurred while crawling bug: " + bug
     raise
 
 

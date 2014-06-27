@@ -1,7 +1,7 @@
 Bugzilla-py
 ===========
 
-This is an experimental library used to crawl meta-data information of bugs at [Bugzilla](http://bugzilla.mozilla.org/).
+This is an experimental library used to crawl meta-data information of bugs reports at [Bugzilla](http://bugzilla.mozilla.org/).
 
 Usage: Command line
 -------------------
